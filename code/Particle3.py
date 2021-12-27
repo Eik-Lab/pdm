@@ -4,34 +4,38 @@ import matplotlib.pyplot as plt
 import os
 
 from keras.models import load_model
-import keras.backend as K
+import keras.backend as K
 
 
-# Path from where to retrieve the model output file
+# Path from where to retrieve the model output file
 output_path = 'regression_model_v0.h5'
-sequence_length = 50
+sequence_length = 50
 
-test_data = pd.read_csv("test.csv")
+test_data = pd.read_csv("test.csv")
 
 
-n_turb = test_data['id'].unique().max()
+n_turb = test_data['id'].unique().max()
 
-# pick the feature columns 
+# pick the feature columns 
 sensor_cols = ['s' + str(i) for i in range(1,22)]
-sequence_cols = ['setting1', 'setting2', 'setting3', 'cycle_norm']
-sequence_cols.extend(sensor_cols)
+sequence_cols = [
+    'setting1',
+    'setting2',
+    'setting3',
+    'cycle_norm',
+    *sensor_cols,
+]
+# We pick the last sequence for each id in the test data
+seq_array_test_last = [test_data[test_data['id']==id][sequence_cols].values[-sequence_length:] 
+                       for id in range(1, n_turb + 1) if len(test_data[test_data['id']==id]) >= sequence_length]
 
-# We pick the last sequence for each id in the test data
-seq_array_test_last = [test_data[test_data['id']==id][sequence_cols].values[-sequence_length:] 
-                       for id in range(1, n_turb + 1) if len(test_data[test_data['id']==id]) >= sequence_length]
+seq_array_test_last = np.asarray(seq_array_test_last).astype(np.float32)
 
-seq_array_test_last = np.asarray(seq_array_test_last).astype(np.float32)
+print("This is the shape of the test set: {} turbines, {} cycles and {} features.".format(
+    seq_array_test_last.shape[0], seq_array_test_last.shape[1], seq_array_test_last.shape[2]))
 
-print("This is the shape of the test set: {} turbines, {} cycles and {} features.".format(
-    seq_array_test_last.shape[0], seq_array_test_last.shape[1], seq_array_test_last.shape[2]))
-
-print("There is only {} turbines out of {} as {} turbines didn't have more than {} cycles.".format(
-    seq_array_test_last.shape[0], n_turb, n_turb - seq_array_test_last.shape[0], sequence_length))
+print("There is only {} turbines out of {} as {} turbines didn't have more than {} cycles.".format(
+    seq_array_test_last.shape[0], n_turb, n_turb - seq_array_test_last.shape[0], sequence_length))
 
 y_mask = [len(test_data[test_data['id']==id]) >= sequence_length for id in test_data['id'].unique()]
 label_array_test_last = test_data.groupby('id')['RUL'].nth(-1)[y_mask].values

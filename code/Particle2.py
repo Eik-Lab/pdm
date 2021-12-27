@@ -52,19 +52,24 @@ def reshapeFeatures(id_df, seq_length, seq_cols):
       
 # pick the feature columns 
 sensor_cols = ['s' + str(i) for i in range(1,22)]
-sequence_cols = ['setting1', 'setting2', 'setting3', 'cycle_norm']
-sequence_cols.extend(sensor_cols)
+sequence_cols = [
+    'setting1',
+    'setting2',
+    'setting3',
+    'cycle_norm',
+    *sensor_cols,
+]
 
-# generator for the sequences
-feat_gen = (list(reshapeFeatures(train_data[train_data['id']==id], sequence_length, sequence_cols)) 
-           for id in range(1, n_turb + 1))
+# generator for the sequences
+feat_gen = (list(reshapeFeatures(train_data[train_data['id']==id], sequence_length, sequence_cols)) 
+           for id in range(1, n_turb + 1))
 
-# generate sequences and convert to numpy array
-feat_array = np.concatenate(list(feat_gen)).astype(np.float32)
+# generate sequences and convert to numpy array
+feat_array = np.concatenate(list(feat_gen)).astype(np.float32)
 
-print("The data set has now shape: {} entries, {} cycles and {} features.".format(feat_array.shape[0],
-                                                                                  feat_array.shape[1],
-                                                                                  feat_array.shape[2]))    
+print("The data set has now shape: {} entries, {} cycles and {} features.".format(feat_array.shape[0],
+                                                                                  feat_array.shape[1],
+                                                                                  feat_array.shape[2]))
     
 # function to generate label
 def reshapeLabel(id_df, seq_length=sequence_length, label=['RUL']):
