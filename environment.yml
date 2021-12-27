@@ -10,4 +10,3 @@ dependencies:
       - yfinance>=0.1.59
       - streamlit>=0.83.0
       - scikit-learn
-

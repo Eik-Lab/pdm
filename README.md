@@ -39,8 +39,7 @@ python3 -m pip install -r requirements.txt
 
 Enter the folder where you have downloaded the code, and open a terminal in the current folder. For a guide, take a look at the following guide: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/
 
-
-NOTE: In Windows, you might have to use the anaconda prompt instead of the 
+NOTE: In Windows, you might have to use the anaconda prompt instead of the
 command prompt or powershell.
 
 To run the streamlit version of the app, run the command:
@@ -51,3 +50,14 @@ If you used conda, you need to enter your environment by doing the following:
 conda activate pdm-env
 ```
 
+Now, we have to do multiple steps:
+
+1. We have to first run the `Particle1.py` script to read the data, sort it and then normalize the data
+2. Then we run the `Particle2.py` script to build our neural network, and train it.
+3. Finally, to train our model, we run the `particle3.py` script to evaluate our model.
+
+All scripts can be ran with the following code in your terminal:
+
+```bash
+python ./code/<Script name>.py
+```
