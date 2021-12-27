@@ -8,10 +8,10 @@ import keras.backend as K
 
 
 # Path from where to retrieve the model output file
-output_path = 'regression_model_v0.h5'
+output_path = 'model/regression_model_v0.h5'
 sequence_length = 50
 
-test_data = pd.read_csv("test.csv")
+test_data = pd.read_csv("./data/test.csv")
 
 
 n_turb = test_data['id'].unique().max()

@@ -1,0 +1,13 @@
+name: pdm-env
+dependencies:
+  - python>=3.8
+  - anaconda
+  - pandas>=1.2.5
+  - tensorflow
+  - keras
+  - matplotlib
+  - pip:
+      - yfinance>=0.1.59
+      - streamlit>=0.83.0
+      - scikit-learn
+

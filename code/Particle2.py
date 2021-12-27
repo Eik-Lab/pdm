@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 # where to save the model output file
 output_path = 'regression_model_v0.h5'
 
-train_data = pd.read_csv('train.csv')
+train_data = pd.read_csv('./data/train.csv')
 n_turb = train_data['id'].unique().max()
 
 
