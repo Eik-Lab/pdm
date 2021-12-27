@@ -39,6 +39,8 @@ python3 -m pip install -r requirements.txt
 
 Enter the folder where you have downloaded the code, and open a terminal in the current folder. For a guide, take a look at the following guide: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/
 
+Make sure that you are in the root directory of the folder(i.e. not in the folder code, data, images, model or report).
+
 NOTE: In Windows, you might have to use the anaconda prompt instead of the
 command prompt or powershell.
 

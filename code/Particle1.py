@@ -68,7 +68,7 @@ train_data = join_data.reindex(columns = train_data.columns)
 print("The size of the train data set is now: {} entries and {} features.".format(train_data.shape[0],
                                                                                   train_data.shape[1]))
 
-train_data.to_csv('train.csv', encoding='utf-8',index = None)
+train_data.to_csv('./data/train.csv', encoding='utf-8',index = None)
 print("Train Data saved as train.csv")
 
 # MinMax normalization (from 0 to 1)
@@ -98,5 +98,5 @@ test_data.loc[test_data['RUL'] <= w0, 'label2'] = 2
 print("The size of the test data set is now: {} entries and {} features.".format(test_data.shape[0],
                                                                                  test_data.shape[1]))
 
-test_data.to_csv('test.csv', encoding='utf-8',index = None)
+test_data.to_csv('./data/test.csv', encoding='utf-8',index = None)
 print("Test Data saved as test.csv")
