@@ -1,4 +1,3 @@
-python
 pandas
 pip
 tensorflow
